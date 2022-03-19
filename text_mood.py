@@ -178,7 +178,7 @@ def text_mood(text):
         text
     ]
 
-    results = model.predict(messages, k=2)
+    results = model.predict(messages, k=1.5)
 
     for message, sentiment in zip(messages, results):
         print(sentiment)
