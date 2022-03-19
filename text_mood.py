@@ -1,5 +1,6 @@
 # -*- coding: cp1251 -*-
 import csv
+import random
 
 import emoji
 from dostoevsky.tokenization import RegexTokenizer
@@ -178,7 +179,9 @@ def text_mood(text):
         text
     ]
 
-    results = model.predict(messages, k=3)
+    n = random.randint(1, 10)
+    print('random', n)
+    results = model.predict(messages, k=n)
 
     for message, sentiment in zip(messages, results):
         print(sentiment)
@@ -189,6 +192,3 @@ def text_mood(text):
         result = emoji_checker(text, result)
 
     return result
-
-
-
