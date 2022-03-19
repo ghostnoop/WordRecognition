@@ -182,10 +182,9 @@ def text_mood(text):
     results = model.predict(messages, k=2)
 
     for message, sentiment in zip(messages, results):
+        if 'skip' in sentiment:
+            del sentiment['skip']
         print(sentiment)
-
-    if 'skip' in sentiment:
-        del sentiment['skip']
 
     result = max(sentiment, key=sentiment.get)
 
