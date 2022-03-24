@@ -135,7 +135,7 @@ d = {'à': ['à', 'a', '@', '4'],
      }
 
 
-def profanity_check(text):
+def ru_profanity_checker(text):
     text = text.lower().replace(" ", "")
 
     for key, value in d.items():
@@ -166,7 +166,7 @@ def profanity_check(text):
     return flag
 
 
-def text_mood(text):
+def ru_emotion_recognition(text):
     FastTextSocialNetworkModel.MODEL_PATH = 'fasttext-social-network-model.bin'
     tokenizer = RegexTokenizer()
     model = FastTextSocialNetworkModel(tokenizer=tokenizer)
@@ -180,7 +180,6 @@ def text_mood(text):
     for message, sentiment in zip(messages, results):
         if 'skip' in sentiment:
             del sentiment['skip']
-        print(sentiment)
 
     result = max(sentiment, key=sentiment.get)
 

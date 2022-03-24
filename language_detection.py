@@ -1,5 +1,8 @@
 import re
 
+from en import en_profanity_checker, en_emotion_recognition
+from text_mood import ru_profanity_checker, ru_emotion_recognition
+
 
 def detect_language(text):
     en = "abcdefghijklmnopqrstuvwxyz"
@@ -17,8 +20,10 @@ def detect_language(text):
             ru_counter += 1
 
     if en_counter >= ru_counter:
-        result = 'en'
+        profanity = en_profanity_checker(text)
+        mood = en_emotion_recognition(text)
     else:
-        result = 'ru'
+        profanity = ru_profanity_checker(text)
+        mood = ru_emotion_recognition(text)
 
-    return result
+    return profanity, mood
