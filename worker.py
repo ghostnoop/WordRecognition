@@ -11,4 +11,5 @@ emotion_dct = {
 def main_work(text):
     profanity, mood = detect_language(text)
     emojis = extract_emojis(text)
+    mood = emotion_dct[mood.lower()]
     return profanity, mood, emojis
