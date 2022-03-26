@@ -24,24 +24,21 @@ def extract_emojis(text) -> dict:
 
 
 def emoji_checker(text, current_result):
-    try:
-        text = emoji.demojize(text)
-        text = re.findall(r'(:[^:]*:)', text)
-        list_emoji = [x for x in text]
-        mood = {"positive": 0, "neutral": 0, "negative": 0}
+    text = emoji.demojize(text)
+    text = re.findall(r'(:[^:]*:)', text)
+    list_emoji = [x for x in text]
+    mood = {"positive": 0, "neutral": 0, "negative": 0}
 
-        if list_emoji:
-            for emj in list_emoji:
-                emj = emj.strip()
-                value = dic.get(emj, None)
-                if value is not None:
-                    mood[value] += 1
+    if list_emoji:
+        for emj in list_emoji:
+            emj = emj.strip()
+            value = dic.get(emj, None)
+            if value is not None:
+                mood[value] += 1
 
-            result = max(mood, key=mood.get)
-        else:
-            result = current_result
+        result = max(mood, key=mood.get)
+    else:
+        result = current_result
 
-        return result
-    except Exception as e:
-        print(text, list_emoji, f'|{emj}|', f'|{value}|')
-        print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+    return result
+
