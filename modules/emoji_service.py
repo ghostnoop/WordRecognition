@@ -11,7 +11,7 @@ with open('files/emojies.csv', 'r', encoding='utf-8') as f:
     lines = f.read().strip().split('\n')
     for row in lines:
         a, b = row.split(';')
-        dic[emoji.demojize(a)] = b
+        dic[emoji.demojize(a).strip()] = b
 
 
 def extract_emojis(text) -> dict:
@@ -32,7 +32,7 @@ def emoji_checker(text, current_result):
 
         if list_emoji:
             for emj in list_emoji:
-                emj = emj
+                emj = emj.strip()
                 value = dic.get(emj)
                 if emj is not None:
                     mood[value] += 1
