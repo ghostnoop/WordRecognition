@@ -15,13 +15,16 @@ from worker import main_work
 def child(connection: CustomConnection):
     while True:
         comment: Comment = connection.receive(wait=True)
-        profanity, mood, emojis = main_work(comment.text)
-        comment.is_contain_profanity = profanity
-        comment.emotion_text_type_id = mood
-        comment.emoji = emojis
-        comment.is_done = True
-
+        try:
+            profanity, mood, emojis = main_work(comment.text)
+            comment.is_contain_profanity = profanity
+            comment.emotion_text_type_id = mood
+            comment.emoji = emojis
+            comment.is_done = True
+        except Exception as e:
+            pass
         connection.send(comment)
+
 
 
 async def async_worker(connections: dict, main_connection: Connection, processes: int):
