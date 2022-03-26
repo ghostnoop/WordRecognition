@@ -24,7 +24,9 @@ def extract_emojis(text) -> dict:
 
 def emoji_checker(text, current_result):
     text = emoji.demojize(text)
+    print('demojize', text)
     text = re.findall(r'(:[^:]*:)', text)
+    print('findall', text)
     list_emoji = [emoji.emojize(x) for x in text]
     print('list_emoji', list_emoji)
     mood = {"positive": 0, "neutral": 0, "negative": 0}
