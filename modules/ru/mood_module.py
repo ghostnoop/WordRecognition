@@ -1,4 +1,5 @@
 # -*- coding: cp1251 -*-
+import warnings
 
 from dostoevsky.tokenization import RegexTokenizer
 from dostoevsky.models import FastTextSocialNetworkModel
@@ -97,7 +98,9 @@ def ru_profanity_checker(text):
 
 
 def ru_emotion_recognition(text):
-    FastTextSocialNetworkModel.MODEL_PATH = 'files/fasttext-social-network-model.bin'
+    with warnings.catch_warnings():
+        warnings.filterwarnings('ignore')
+        FastTextSocialNetworkModel.MODEL_PATH = 'files/fasttext-social-network-model.bin'
     tokenizer = RegexTokenizer()
     model = FastTextSocialNetworkModel(tokenizer=tokenizer)
 
