@@ -115,6 +115,7 @@ def ru_emotion_recognition(text):
     result = max(sentiment, key=sentiment.get)
 
     if result == 'neutral':
+        print('emoji_checker', text)
         result = emoji_checker(text, result)
 
     return result
