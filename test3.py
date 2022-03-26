@@ -1,6 +1,7 @@
 import asyncio
 import multiprocessing
 import random
+import time
 from multiprocessing.connection import Connection
 from typing import List
 
@@ -57,6 +58,9 @@ def worker(connections: dict, main_connection: Connection, processes: int):
 
 if __name__ == '__main__':
     processes = 16
+    print(16)
+    time.sleep(2)
+
     main_receive, main_sendler = multiprocessing.Pipe(duplex=False)
     process_receiver_dct = {}
 
