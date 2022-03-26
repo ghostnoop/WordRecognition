@@ -1,6 +1,7 @@
 import asyncio
 import multiprocessing
 import random
+import sys
 import time
 from multiprocessing.connection import Connection
 from typing import List
@@ -16,10 +17,13 @@ from worker import main_work
 def child(connection: CustomConnection):
     while True:
         comment = connection.receive(wait=True)
-        if comment is None:
-            time.sleep(10)
+        try:
+            comment.id
+        except Exception:
             print('comment is none', 'index', connection.index)
+            time.sleep(10)
             continue
+
         try:
             profanity, mood, emojis = main_work(comment.text)
             comment.is_contain_profanity = profanity
@@ -29,6 +33,7 @@ def child(connection: CustomConnection):
             break
         except Exception as e:
             print(e, comment, type(comment))
+            print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
 
         connection.send(comment)
 
