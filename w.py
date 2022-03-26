@@ -5,7 +5,8 @@ import emoji
 
 from worker import main_work
 
-text='👍👍👍👍👍👍👍👍'
+text = '👍👍👍👍👍👍👍👍'
 # a=detect_language(text)
-d=main_work(text)
+print('main_work', text)
+d = main_work(text)
 print(d)
