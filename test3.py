@@ -49,7 +49,7 @@ async def async_worker(connections: dict, main_connection: Connection, processes
             print(s, 'main', comment.id, comment.emotion_text_type_id,
                   comment.is_contain_profanity, comment.emoji,
                   comment.text.replace('\n', ''))
-            await comment.save()
+            # await comment.save()
             counter += 1
 
 
