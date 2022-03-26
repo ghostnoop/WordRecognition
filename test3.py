@@ -24,7 +24,7 @@ def child(connection: CustomConnection):
             time.sleep(10)
             continue
 
-        profanity, mood, emojis = main_work(comment.text[:999])
+        profanity, mood, emojis = main_work(comment.text[:500])
         comment.is_contain_profanity = profanity
         comment.emotion_text_type_id = mood
         comment.emoji = emojis
