@@ -34,7 +34,7 @@ def emoji_checker(text, current_result):
             for emj in list_emoji:
                 emj = emj.strip()
                 value = dic.get(emj, None)
-                if emj is not None and value is not None:
+                if value is not None:
                     mood[value] += 1
 
             result = max(mood, key=mood.get)
