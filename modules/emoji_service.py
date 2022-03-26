@@ -6,11 +6,11 @@ import csv
 import re
 
 dic = {}
-with open('files/emojies.csv', 'r', newline='') as csvfile:
-    fieldnames = ['emoji', 'value']
-    reader = csv.DictReader(csvfile, fieldnames)
-    for row in reader:
-        dic[row["emoji"]] = row['value']
+with open('files/emojies.csv', 'r', encoding='utf-8') as f:
+    lines = f.read().strip().split('\n')
+    for row in lines:
+        a, b = row.split(';')
+        dic[a] = b
 
 
 def extract_emojis(text) -> dict:
@@ -26,7 +26,7 @@ def emoji_checker(text, current_result):
     text = emoji.demojize(text)
     text = re.findall(r'(:[^:]*:)', text)
     list_emoji = [emoji.emojize(x) for x in text]
-    print('list_emoji',list_emoji)
+    print('list_emoji', list_emoji)
     mood = {"positive": 0, "neutral": 0, "negative": 0}
 
     if list_emoji:
