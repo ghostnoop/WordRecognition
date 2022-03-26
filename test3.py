@@ -23,8 +23,8 @@ def child(connection: CustomConnection):
             print('comment is none', 'index', connection.index)
             time.sleep(10)
             continue
-
-        profanity, mood, emojis = main_work(comment.text[:500])
+        comment.text = comment.text[:333]
+        profanity, mood, emojis = main_work(comment.text)
         comment.is_contain_profanity = profanity
         comment.emotion_text_type_id = mood
         comment.emoji = emojis
@@ -61,7 +61,7 @@ async def async_worker(connections: dict, main_connection: Connection, processes
             print(s, 'main', comment.id, comment.emotion_text_type_id,
                   comment.is_contain_profanity, comment.emoji,
                   comment.text.replace('\n', ''))
-            await comment.save()
+            await comment.save(update_fields=['emotion_text_type_id', 'is_contain_profanity', 'emoji'])
             counter += 1
 
 
