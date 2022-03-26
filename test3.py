@@ -15,16 +15,19 @@ from worker import main_work
 
 def child(connection: CustomConnection):
     while True:
-        comment: Comment = connection.receive(wait=False)
+        comment: Comment = connection.receive(wait=True)
+        if comment is None:
+            continue
         try:
             profanity, mood, emojis = main_work(comment.text)
             comment.is_contain_profanity = profanity
             comment.emotion_text_type_id = mood
             comment.emoji = emojis
             comment.is_done = True
+            break
         except Exception as e:
             print(e)
-            pass
+
         connection.send(comment)
 
 

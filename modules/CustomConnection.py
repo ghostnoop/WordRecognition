@@ -10,7 +10,7 @@ class CustomConnection:
         self.index = index
 
     def receive(self, wait=True):
-        if wait and self.__receive.poll(timeout=60):
+        if wait and self.__receive.poll(timeout=60*5):
             obj = self.__receive.recv()
         else:
             obj = self.__receive.recv()
