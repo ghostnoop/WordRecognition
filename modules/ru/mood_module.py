@@ -1,4 +1,3 @@
-# -*- coding: cp1251 -*-
 
 
 from dostoevsky.tokenization import RegexTokenizer

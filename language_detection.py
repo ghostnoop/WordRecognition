@@ -5,6 +5,7 @@ from modules.ru.mood_module import ru_profanity_checker, ru_emotion_recognition
 
 
 def detect_language(text):
+    print('detect',text)
     en = "abcdefghijklmnopqrstuvwxyz"
     en_alphabet = list(en.strip())
     ru = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"

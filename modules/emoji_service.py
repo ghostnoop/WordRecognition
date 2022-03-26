@@ -14,6 +14,7 @@ with open('files/emojies.csv', 'r', encoding='utf-8') as f:
 
 
 def extract_emojis(text) -> dict:
+    print('extract_emojis', text)
     emojies = defaultdict(int)
     for symb in text:
         if symb in emoji.UNICODE_EMOJI['en']:
@@ -23,7 +24,7 @@ def extract_emojis(text) -> dict:
 
 
 def emoji_checker(text, current_result):
-    print('textt',text)
+    print('textt', text)
     text = emoji.demojize(text)
     print('demojize', text)
     text = re.findall(r'(:[^:]*:)', text)
