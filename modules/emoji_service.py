@@ -23,6 +23,7 @@ def extract_emojis(text) -> dict:
 
 
 def emoji_checker(text, current_result):
+    print('textt',text)
     text = emoji.demojize(text)
     print('demojize', text)
     text = re.findall(r'(:[^:]*:)', text)
