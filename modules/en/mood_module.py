@@ -22,4 +22,6 @@ def en_emotion_recognition(text):
 if __name__ == '__main__':
     print(en_profanity_checker('👍👍👍😍'))
     print(en_profanity_checker('Zidan juventus no👎'))
+    print(en_profanity_checker('bad'))
+    print(en_profanity_checker('good'))
     print(en_profanity_checker('Merry Christmas – wishing you good friends and happy memories'))
