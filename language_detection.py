@@ -1,12 +1,14 @@
 import re
 
-from en import en_profanity_checker, en_emotion_recognition
-from text_mood import ru_profanity_checker, ru_emotion_recognition
+from modules.en.mood_module import en_profanity_checker, en_emotion_recognition
+from modules.ru.mood_module import ru_profanity_checker, ru_emotion_recognition
 
 
 def detect_language(text):
     en = "abcdefghijklmnopqrstuvwxyz"
     en_alphabet = list(en.strip())
+    ru = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+    ru_alphabet = list(en.strip())
     reg = re.compile(r'[^\w\s]')
     text = reg.sub('', text)
 
@@ -14,10 +16,10 @@ def detect_language(text):
     ru_counter = 0
 
     for symbol in text:
-        if symbol in en_alphabet:
-            en_counter += 1
-        else:
+        if symbol in ru_alphabet:
             ru_counter += 1
+        else:
+            en_counter += 1
 
     if en_counter >= ru_counter:
         profanity = en_profanity_checker(text)
@@ -25,5 +27,6 @@ def detect_language(text):
     else:
         profanity = ru_profanity_checker(text)
         mood = ru_emotion_recognition(text)
+
 
     return profanity, mood

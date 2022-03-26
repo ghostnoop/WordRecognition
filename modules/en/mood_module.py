@@ -1,3 +1,4 @@
+import nltk
 from better_profanity import profanity
 from LeXmo import LeXmo
 
@@ -16,6 +17,9 @@ def en_emotion_recognition(text):
     emo = LeXmo.LeXmo(text)
     emo.pop('text', None)
 
-    result = max(emo, key=emo.get)
+    return emo
 
-    return result
+if __name__ == '__main__':
+    print(en_profanity_checker('👍👍👍😍'))
+    print(en_profanity_checker('Zidan juventus no👎'))
+    print(en_profanity_checker('Merry Christmas – wishing you good friends and happy memories'))

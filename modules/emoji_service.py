@@ -17,7 +17,7 @@ def extract_emojis(text) -> dict:
 
 def emoji_checker(text, current_result):
     dic = {}
-    with open('emojies.csv', 'r', newline='') as csvfile:
+    with open('files/emojies.csv', 'r', newline='') as csvfile:
         fieldnames = ['emoji', 'value']
         reader = csv.DictReader(csvfile, fieldnames)
         for row in reader:

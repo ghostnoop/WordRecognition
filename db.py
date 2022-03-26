@@ -1,6 +1,7 @@
 import os
 
 from dotenv import find_dotenv, load_dotenv
+from tortoise import Model, fields
 
 load_dotenv(find_dotenv())
 
@@ -15,3 +16,6 @@ class Config:
 
     def DATABASE_URL(self) -> str:
         return f'postgres://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
+
+
+
