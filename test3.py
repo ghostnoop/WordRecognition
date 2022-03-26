@@ -59,8 +59,8 @@ def worker(connections: dict, main_connection: Connection, processes: int):
 
 
 if __name__ == '__main__':
-    processes = 16
-    print(16)
+    processes = 20
+    print(processes)
     time.sleep(2)
 
     main_receive, main_sendler = multiprocessing.Pipe(duplex=False)
