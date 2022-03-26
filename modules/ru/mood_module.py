@@ -1,5 +1,4 @@
 # -*- coding: cp1251 -*-
-import warnings
 
 from dostoevsky.tokenization import RegexTokenizer
 from dostoevsky.models import FastTextSocialNetworkModel
@@ -9,6 +8,8 @@ from modules.emoji_service import emoji_checker
 with open('files/bad_words.csv', 'r', encoding='utf-8') as f:
     abusive_language = f.read().strip().split('\n')
 
+import warnings
+warnings.filterwarnings('ignore', '.*do not.*', 'Warning')
 
 def distance(a, b):
     "Calculates the Levenshtein distance between a and b."
@@ -98,9 +99,8 @@ def ru_profanity_checker(text):
 
 
 def ru_emotion_recognition(text):
-    with warnings.catch_warnings():
-        warnings.filterwarnings('ignore')
-        FastTextSocialNetworkModel.MODEL_PATH = 'files/fasttext-social-network-model.bin'
+
+    FastTextSocialNetworkModel.MODEL_PATH = 'files/fasttext-social-network-model.bin'
     tokenizer = RegexTokenizer()
     model = FastTextSocialNetworkModel(tokenizer=tokenizer)
 
