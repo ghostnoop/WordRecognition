@@ -47,7 +47,7 @@ async def async_worker(connections: dict, main_connection: Connection, processes
     )
 
     while True:
-        comments = await Comment.filter(is_done=False).limit(1_000)
+        comments = await Comment.filter(is_done=False).limit(5_000)
         size = len(comments)
         for comment in comments:
             idx = random.randint(0, processes - 1)
@@ -71,7 +71,7 @@ def worker(connections: dict, main_connection: Connection, processes: int):
 
 
 if __name__ == '__main__':
-    processes = 100
+    processes = 250
     print(processes)
     time.sleep(2)
 
