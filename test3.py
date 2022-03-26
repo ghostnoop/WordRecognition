@@ -47,7 +47,7 @@ async def async_worker(connections: dict, main_connection: Connection, processes
             comment: Comment = main_connection.recv()
             print('main', comment.id, comment.emotion_text_type_id, comment.is_contain_profanity, comment.emoji)
             # await comment.save()
-
+        break
 
 def worker(connections: dict, main_connection: Connection, processes: int):
     loop = asyncio.new_event_loop()
