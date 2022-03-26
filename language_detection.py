@@ -22,9 +22,11 @@ def detect_language(text):
             ru_counter += 1
 
     if en_counter > ru_counter:
+        print('en')
         profanity = en_profanity_checker(text)
         mood = en_emotion_recognition(text)
     else:
+        print('ru')
         profanity = ru_profanity_checker(text)
         mood = ru_emotion_recognition(text)
 

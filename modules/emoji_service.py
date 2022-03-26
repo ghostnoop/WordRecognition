@@ -5,6 +5,13 @@ import csv
 
 import re
 
+dic = {}
+with open('files/emojies.csv', 'r', newline='') as csvfile:
+    fieldnames = ['emoji', 'value']
+    reader = csv.DictReader(csvfile, fieldnames)
+    for row in reader:
+        dic[row["emoji"]] = row['value']
+
 
 def extract_emojis(text) -> dict:
     emojies = defaultdict(int)
@@ -16,13 +23,6 @@ def extract_emojis(text) -> dict:
 
 
 def emoji_checker(text, current_result):
-    dic = {}
-    with open('files/emojies.csv', 'r', newline='') as csvfile:
-        fieldnames = ['emoji', 'value']
-        reader = csv.DictReader(csvfile, fieldnames)
-        for row in reader:
-            dic[row["emoji"]] = row['value']
-
     text = emoji.demojize(text)
     text = re.findall(r'(:[^:]*:)', text)
     list_emoji = [emoji.emojize(x) for x in text]
@@ -34,6 +34,7 @@ def emoji_checker(text, current_result):
             if emj is not None:
                 mood[value] += 1
 
+        print(mood)
         result = max(mood, key=mood.get)
     else:
         result = current_result
