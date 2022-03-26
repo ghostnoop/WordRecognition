@@ -19,6 +19,7 @@ def child(connection: CustomConnection):
         comment.is_contain_profanity = profanity
         comment.emotion_text_type_id = mood
         comment.emoji = emojis
+        comment.is_done = True
 
         connection.send(comment)
 
@@ -31,7 +32,7 @@ async def async_worker(connections: dict, main_connection: Connection, processes
     )
 
     while True:
-        comments = await Comment.filter().limit(2)
+        comments = await Comment.filter(is_done=False).limit(100)
         size = len(comments)
         for comment in comments:
             idx = random.randint(0, processes - 1)
@@ -43,8 +44,7 @@ async def async_worker(connections: dict, main_connection: Connection, processes
             print('main', comment.id, comment.emotion_text_type_id,
                   comment.is_contain_profanity, comment.emoji,
                   comment.text.replace('\n', ''))
-            # await comment.save()
-        break
+            await comment.save()
 
 
 def worker(connections: dict, main_connection: Connection, processes: int):
@@ -53,7 +53,7 @@ def worker(connections: dict, main_connection: Connection, processes: int):
 
 
 if __name__ == '__main__':
-    processes = 2
+    processes = 5
     main_receive, main_sendler = multiprocessing.Pipe(duplex=False)
     process_receiver_dct = {}
 
