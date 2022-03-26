@@ -1,4 +1,4 @@
-
+# -*- coding: cp1251 -*-
 
 from dostoevsky.tokenization import RegexTokenizer
 from dostoevsky.models import FastTextSocialNetworkModel
