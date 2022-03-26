@@ -33,7 +33,7 @@ def emoji_checker(text, current_result):
         if list_emoji:
             for emj in list_emoji:
                 emj = emj.strip()
-                value = dic.get(emj)
+                value = dic.get(emj, None)
                 if emj is not None:
                     mood[value] += 1
 
