@@ -9,15 +9,21 @@ from tortoise import Tortoise
 from db import Config
 from models.Comment import Comment
 from modules.CustomConnection import CustomConnection
+from worker import main_work
 
 
 def child(connection: CustomConnection):
     while True:
-        data: Comment = connection.receive(wait=True)
-        s = f'{connection.index} ## {data.id}'
+        comment: Comment = connection.receive(wait=True)
+        profanity, mood, emojis = main_work(comment.text)
+        comment.is_contain_profanity = profanity
+        comment.emotion_text_type_id = mood
+        comment.emoji = emojis
+
+        s = f'{connection.index} ## {comment.id}'
         print(s)
 
-        connection.send(data)
+        connection.send(comment)
 
     pass
 
@@ -33,13 +39,13 @@ async def async_worker(connections: dict, main_connection: Connection, processes
         comments = await Comment.filter().limit(2)
         size = len(comments)
         for comment in comments:
-            idx = random.randint(0, processes-1)
+            idx = random.randint(0, processes - 1)
             conn: Connection = connections[idx]
             conn.send(comment)
 
         for i in range(size):
             comment: Comment = main_connection.recv()
-            print('main',comment.id)
+            print('main', comment.id, comment.emotion_text_type_id, comment.is_contain_profanity, comment.emoji)
             # await comment.save()
 
 

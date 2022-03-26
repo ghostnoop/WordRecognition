@@ -28,5 +28,4 @@ def detect_language(text):
         profanity = ru_profanity_checker(text)
         mood = ru_emotion_recognition(text)
 
-
     return profanity, mood
