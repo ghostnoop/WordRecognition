@@ -3,3 +3,5 @@ emoji
 regex
 better-profanity
 LeXmo
+python-dotenv
+tortoise-orm[asyncpg]
