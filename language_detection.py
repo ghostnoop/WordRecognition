@@ -11,12 +11,12 @@ def detect_language(text):
     ru = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
     ru_alphabet = list(en.strip())
     reg = re.compile(r'[^\w\s]')
-    text = reg.sub('', text)
+    text_copy = reg.sub('', text)
 
     en_counter = 0
     ru_counter = 0
 
-    for symbol in text:
+    for symbol in text_copy:
         if symbol in en_alphabet:
             en_counter += 1
         else:
