@@ -1,8 +1,5 @@
 # -*- coding: cp1251 -*-
 
-import logging
-
-logging.basicConfig(level=logging.ERROR)
 
 from dostoevsky.tokenization import RegexTokenizer
 from dostoevsky.models import FastTextSocialNetworkModel
