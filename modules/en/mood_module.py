@@ -1,7 +1,9 @@
 import nltk
+import operator
+
 from better_profanity import profanity
 from LeXmo import LeXmo
-
+from nltk.sentiment import SentimentIntensityAnalyzer
 
 def en_profanity_checker(text):
     censored = profanity.censor(text)
@@ -18,6 +20,13 @@ def en_emotion_recognition(text):
     emo.pop('text', None)
 
     return emo
+
+async def get_tone_of_en_text(text) -> str:
+    sia = SentimentIntensityAnalyzer()
+    result = sia.polarity_scores(text)
+    result.pop('compound')
+    return max(result.items(), key=operator.itemgetter(1))[0]
+
 
 if __name__ == '__main__':
     print(en_profanity_checker('👍👍👍😍'))
