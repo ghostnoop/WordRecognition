@@ -15,7 +15,7 @@ from worker import main_work
 
 def child(connection: CustomConnection):
     while True:
-        comment: Comment = connection.receive(wait=True)
+        comment: Comment = connection.receive(wait=False)
         try:
             profanity, mood, emojis = main_work(comment.text)
             comment.is_contain_profanity = profanity
