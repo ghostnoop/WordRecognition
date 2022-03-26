@@ -18,7 +18,7 @@ def child(connection: CustomConnection):
         comment = connection.receive(wait=True)
         if comment is None:
             time.sleep(10)
-            print('comment is none','index',connection.index)
+            print('comment is none', 'index', connection.index)
             continue
         try:
             profanity, mood, emojis = main_work(comment.text)
@@ -28,7 +28,7 @@ def child(connection: CustomConnection):
             comment.is_done = True
             break
         except Exception as e:
-            print(e,comment)
+            print(e, comment, type(comment))
 
         connection.send(comment)
 
