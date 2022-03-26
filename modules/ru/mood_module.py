@@ -9,7 +9,7 @@ with open('files/bad_words.csv', 'r', encoding='utf-8') as f:
     abusive_language = f.read().strip().split('\n')
 
 import warnings
-warnings.filterwarnings('ignore', '.*do not.*', 'Warning')
+warnings.filterwarnings('ignore', '.*do not.*', )
 
 def distance(a, b):
     "Calculates the Levenshtein distance between a and b."
