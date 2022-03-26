@@ -28,7 +28,7 @@ def child(connection: CustomConnection):
             comment.is_done = True
             break
         except Exception as e:
-            print(e)
+            print(e,comment)
 
         connection.send(comment)
 
