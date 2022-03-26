@@ -24,18 +24,19 @@ def child(connection: CustomConnection):
             time.sleep(10)
             continue
 
-        try:
-            profanity, mood, emojis = main_work(comment.text)
-            comment.is_contain_profanity = profanity
-            comment.emotion_text_type_id = mood
-            comment.emoji = emojis
-            comment.is_done = True
-            break
-        except Exception as e:
-            print(e, comment, type(comment))
-            print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+        profanity, mood, emojis = main_work(comment.text)
+        comment.is_contain_profanity = profanity
+        comment.emotion_text_type_id = mood
+        comment.emoji = emojis
+        comment.is_done = True
 
-        connection.send(comment)
+        while True:
+            try:
+                connection.send(comment)
+                break
+            except Exception as e:
+                print(e, 'connection error', connection.index)
+                time.sleep(5)
 
 
 async def async_worker(connections: dict, main_connection: Connection, processes: int):
