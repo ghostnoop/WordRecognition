@@ -34,3 +34,10 @@ if __name__ == '__main__':
     print(en_profanity_checker('bad'))
     print(en_profanity_checker('good'))
     print(en_profanity_checker('Merry Christmas – wishing you good friends and happy memories'))
+
+
+    print(get_tone_of_en_text('👍👍👍😍'))
+    print(get_tone_of_en_text('Zidan juventus no👎'))
+    print(get_tone_of_en_text('bad'))
+    print(get_tone_of_en_text('good'))
+    print(get_tone_of_en_text('Merry Christmas – wishing you good friends and happy memories'))
