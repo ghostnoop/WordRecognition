@@ -9,7 +9,6 @@ emotion_dct = {
 
 
 def main_work(text):
-    print('in main', text)
     profanity, mood = detect_language(text)
     emojis = extract_emojis(text)
     try:
