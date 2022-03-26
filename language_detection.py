@@ -16,10 +16,10 @@ def detect_language(text):
     ru_counter = 0
 
     for symbol in text:
-        if symbol in ru_alphabet:
-            ru_counter += 1
-        else:
+        if symbol in en_alphabet:
             en_counter += 1
+        else:
+            ru_counter += 1
 
     if en_counter >= ru_counter:
         profanity = en_profanity_checker(text)
