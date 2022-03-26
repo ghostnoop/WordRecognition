@@ -1,4 +1,7 @@
 import nltk
+nltk.download('vader_lexicon')
+
+
 import operator
 
 from better_profanity import profanity
