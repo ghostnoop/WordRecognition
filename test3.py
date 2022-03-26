@@ -20,12 +20,7 @@ def child(connection: CustomConnection):
         comment.emotion_text_type_id = mood
         comment.emoji = emojis
 
-        s = f'{connection.index} ## {comment.id}'
-        print(s)
-
         connection.send(comment)
-
-    pass
 
 
 async def async_worker(connections: dict, main_connection: Connection, processes: int):
@@ -45,15 +40,16 @@ async def async_worker(connections: dict, main_connection: Connection, processes
 
         for i in range(size):
             comment: Comment = main_connection.recv()
-            print('main', comment.id, comment.emotion_text_type_id, comment.is_contain_profanity, comment.emoji)
+            print('main', comment.id, comment.emotion_text_type_id,
+                  comment.is_contain_profanity, comment.emoji,
+                  comment.text.replace('\n', ''))
             # await comment.save()
         break
+
 
 def worker(connections: dict, main_connection: Connection, processes: int):
     loop = asyncio.new_event_loop()
     loop.run_until_complete(async_worker(connections, main_connection, processes))
-
-    pass
 
 
 if __name__ == '__main__':
@@ -71,7 +67,6 @@ if __name__ == '__main__':
         tasks.append(task)
 
     main_task = multiprocessing.Process(target=worker, args=(process_receiver_dct,
-                                                             main_receive, processes),
-                                        daemon=True)
+                                                             main_receive, processes), daemon=True)
     main_task.start()
     main_task.join()
