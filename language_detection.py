@@ -21,7 +21,7 @@ def detect_language(text):
         else:
             ru_counter += 1
 
-    if en_counter >= ru_counter:
+    if en_counter > ru_counter:
         profanity = en_profanity_checker(text)
         mood = en_emotion_recognition(text)
     else:

@@ -1,2 +1,5 @@
-import random
-print(random.randint(0,1))
+from language_detection import detect_language
+
+text='👍👍👍👍👍👍👍👍'
+a=detect_language(text)
+print(a)
