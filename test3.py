@@ -27,7 +27,6 @@ def child(connection: CustomConnection):
         connection.send(comment)
 
 
-
 async def async_worker(connections: dict, main_connection: Connection, processes: int):
     config = Config()
     await Tortoise.init(
@@ -36,19 +35,22 @@ async def async_worker(connections: dict, main_connection: Connection, processes
     )
 
     while True:
-        comments = await Comment.filter(is_done=False).limit(100)
+        comments = await Comment.filter(is_done=False).limit(10_000)
         size = len(comments)
         for comment in comments:
             idx = random.randint(0, processes - 1)
             conn: Connection = connections[idx]
             conn.send(comment)
-
+        counter = 0
         for i in range(size):
             comment: Comment = main_connection.recv()
-            print('main', comment.id, comment.emotion_text_type_id,
+            s = f'[ {counter} of {size} ] = '
+
+            print(s, 'main', comment.id, comment.emotion_text_type_id,
                   comment.is_contain_profanity, comment.emoji,
                   comment.text.replace('\n', ''))
             await comment.save()
+            counter += 1
 
 
 def worker(connections: dict, main_connection: Connection, processes: int):
