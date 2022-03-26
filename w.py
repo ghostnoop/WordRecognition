@@ -3,8 +3,9 @@ import re
 
 import emoji
 
-from modules.emoji_service import emoji_checker
+from worker import main_work
 
 text='👍👍👍👍👍👍👍👍'
 # a=detect_language(text)
-emoji_checker(text,None)
+d=main_work(text)
+print(d)
