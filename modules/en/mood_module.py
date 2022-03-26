@@ -21,7 +21,7 @@ def en_emotion_recognition(text):
 
     return emo
 
-async def get_tone_of_en_text(text) -> str:
+def get_tone_of_en_text(text) -> str:
     sia = SentimentIntensityAnalyzer()
     result = sia.polarity_scores(text)
     result.pop('compound')
