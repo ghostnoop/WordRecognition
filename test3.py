@@ -61,7 +61,7 @@ async def async_worker(connections: dict, main_connection: Connection, processes
             print(s, 'main', comment.id, comment.emotion_text_type_id,
                   comment.is_contain_profanity, comment.emoji,
                   comment.text.replace('\n', ''))
-            await comment.save(update_fields=['emotion_text_type_id', 'is_contain_profanity', 'emoji'])
+            await comment.save(update_fields=['emotion_text_type_id', 'is_contain_profanity', 'emoji', 'is_done'])
             counter += 1
 
 
@@ -71,7 +71,7 @@ def worker(connections: dict, main_connection: Connection, processes: int):
 
 
 if __name__ == '__main__':
-    processes = 250
+    processes = 500
     print(processes)
     time.sleep(2)
 
