@@ -17,6 +17,8 @@ def child(connection: CustomConnection):
     while True:
         comment: Comment = connection.receive(wait=True)
         if comment is None:
+            time.sleep(10)
+            print('comment is none','index',connection.index)
             continue
         try:
             profanity, mood, emojis = main_work(comment.text)
