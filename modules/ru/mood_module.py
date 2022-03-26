@@ -102,23 +102,23 @@ def ru_profanity_checker(text):
 
 
 def ru_emotion_recognition(text):
-    try:
-        messages = [
-            text
-        ]
 
-        results = model.predict(messages, k=2)
+    messages = [
+        text
+    ]
 
-        for message, sentiment in zip(messages, results):
-            if 'skip' in sentiment:
-                del sentiment['skip']
+    results = model.predict(messages, k=2)
 
-        result = max(sentiment, key=sentiment.get)
+    for message, sentiment in zip(messages, results):
+        if 'skip' in sentiment:
+            del sentiment['skip']
 
-        if result == 'neutral':
-            result = emoji_checker(text, result)
+    result = max(sentiment, key=sentiment.get)
 
-        return result
-    except Exception as e:
-        print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+    if result == 'neutral':
+        result = emoji_checker(text, result)
+
+    return result
+
+
 
