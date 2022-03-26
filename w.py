@@ -7,6 +7,5 @@ from worker import main_work
 
 text = '👍👍👍👍👍👍👍👍'
 # a=detect_language(text)
-print('main_work', text)
 d = main_work(text)
 print(d)
