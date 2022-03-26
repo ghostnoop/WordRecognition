@@ -3,9 +3,11 @@ import re
 
 import emoji
 
-from worker import main_work
+# from worker import main_work
 
 text = '👍👍👍👍👍👍👍👍'
+text = emoji.demojize(text)
+print(text)
 # a=detect_language(text)
-d = main_work(text)
-print(d)
+# d = main_work(text)
+# print(d)
