@@ -42,5 +42,5 @@ def emoji_checker(text, current_result):
 
         return result
     except Exception as e:
-        print(text, list_emoji)
+        print(text, list_emoji, emj)
         print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
