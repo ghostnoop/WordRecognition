@@ -45,6 +45,8 @@ async def async_worker(connections: dict, main_connection: Connection, processes
         db_url=str(config.DATABASE_URL()),
         modules={'models': ['models.Comment']}
     )
+    print(str(config.DATABASE_URL()))
+
 
     while True:
         comments = await Comment.filter(is_done=False).limit(5_000)
