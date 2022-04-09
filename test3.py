@@ -73,7 +73,7 @@ def worker(connections: dict, main_connection: Connection, processes: int):
 
 
 if __name__ == '__main__':
-    processes = 40
+    processes = 10
     print(processes)
     time.sleep(2)
 
