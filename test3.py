@@ -47,10 +47,10 @@ async def async_worker(connections: dict, main_connection: Connection, processes
     )
     print(str(config.DATABASE_URL()))
 
-
     while True:
         comments = await Comment.filter(is_done=False).limit(5000)
         size = len(comments)
+        print('len', size)
         for comment in comments:
             idx = random.randint(0, processes - 1)
             conn: Connection = connections[idx]
