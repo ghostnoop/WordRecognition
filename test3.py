@@ -23,6 +23,7 @@ def child(connection: CustomConnection):
             print('comment is none', 'index', connection.index)
             time.sleep(10)
             continue
+        print('get comment')
         comment.text = comment.text[:333]
         profanity, mood, emojis = main_work(comment.text)
         comment.is_contain_profanity = profanity
@@ -49,7 +50,7 @@ async def async_worker(connections: dict, main_connection: Connection, processes
 
 
     while True:
-        comments = await Comment.filter(is_done=False).limit(5_000)
+        comments = await Comment.filter(is_done=False).limit(5_0)
         size = len(comments)
         for comment in comments:
             idx = random.randint(0, processes - 1)
@@ -73,7 +74,7 @@ def worker(connections: dict, main_connection: Connection, processes: int):
 
 
 if __name__ == '__main__':
-    processes = 10
+    processes = 2
     print(processes)
     time.sleep(2)
 
