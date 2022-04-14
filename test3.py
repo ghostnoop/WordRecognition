@@ -48,7 +48,7 @@ async def async_worker(connections: dict, main_connection: Connection, processes
     print(str(config.DATABASE_URL()))
 
     while True:
-        comments = await Comment.filter(is_done=False).limit(5000)
+        comments = await Comment.filter(is_done=False).limit(500)
         size = len(comments)
         print('len', size)
         for comment in comments:
