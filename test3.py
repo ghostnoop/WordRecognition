@@ -3,6 +3,7 @@ import multiprocessing
 import random
 import sys
 import time
+from datetime import datetime
 from multiprocessing.connection import Connection
 from typing import List
 
@@ -39,6 +40,10 @@ def child(connection: CustomConnection):
                 time.sleep(5)
 
 
+def time_print(*args):
+    print(*args, 'time:', datetime.now().strftime('%H:%M %d.%m'))
+
+
 async def async_worker(connections: dict, main_connection: Connection, processes: int):
     config = Config()
     await Tortoise.init(
@@ -49,10 +54,13 @@ async def async_worker(connections: dict, main_connection: Connection, processes
 
     while True:
         comments = await Comment.filter(is_done=False).limit(500)
-        
 
         size = len(comments)
-        print('len', size)
+        time_print('len', size)
+        if size == 0:
+            time.sleep(10)
+            continue
+
         for comment in comments:
             idx = random.randint(0, processes - 1)
             conn: Connection = connections[idx]
@@ -62,9 +70,9 @@ async def async_worker(connections: dict, main_connection: Connection, processes
             comment: Comment = main_connection.recv()
             s = f'[ {counter} of {size} ] = '
 
-            print(s, 'main', comment.id, comment.emotion_text_type_id,
-                  comment.is_contain_profanity, comment.emoji,
-                  comment.text.replace('\n', ''))
+            time_print(s, 'main', comment.id, comment.emotion_text_type_id,
+                       comment.is_contain_profanity, comment.emoji,
+                       comment.text.replace('\n', ''))
             await comment.save(update_fields=['emotion_text_type_id', 'is_contain_profanity', 'emoji', 'is_done'])
             counter += 1
 
