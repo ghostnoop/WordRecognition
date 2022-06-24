@@ -53,8 +53,8 @@ async def async_worker(connections: dict, main_connection: Connection, processes
     print(str(config.DATABASE_URL()))
 
     while True:
-        comments = await Comment.filter(is_done=False).limit(500)
-
+        # comments = await Comment.filter(is_done=False).limit(500)
+        comments = await Comment.filter(id__in=[28930317, 28930318, 28930319, 28930320, 28930321, 28930322, 28930323, 28930324, 28930325, 28930326, 28930327, 28930328, 28930329, 28930330, 28930331, 28930332, 28930333, 28930334, 28930335, 28930336, 28930337, 28930338, 28930339, 28930340, 28930341, 28930342, 28930343, 28930344, 28930345, 28930346, 28930347, 28930348, 28930349, 28930350, 28930351, 28930352, 28930353, 28930354, 28930355, 28930417, 28930356, 28930357, 28930358, 28930359, 28930360, 28930361, 28930362, 28930363, 28930364, 28930365])
         size = len(comments)
         time_print('len', size)
         if size == 0:
